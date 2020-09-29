@@ -1,7 +1,5 @@
 package com.ormissia.blog.service;
 
-import com.ormissia.blog.pojo.User;
-
 import java.util.HashMap;
 
 /**
@@ -10,5 +8,5 @@ import java.util.HashMap;
  */
 public interface LoginService {
 
-    public HashMap<String,String> userLogin(String username, String password);
+    HashMap<String,String> userLogin(String username, String password);
 }

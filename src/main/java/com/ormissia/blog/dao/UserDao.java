@@ -15,7 +15,7 @@ public interface UserDao {
     //删
 
     //查
-    public User selectUserByUsername(@Param("username") String username);
+    User selectUserByUsername(@Param("username") String username);
 
     //改
 

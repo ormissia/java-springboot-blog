@@ -13,6 +13,14 @@ public class Type implements Serializable {
     private Integer typeId;//类型ID
     private String typeName;//类型名称
 
+    @Override
+    public String toString() {
+        return "Type{" +
+                "typeId=" + typeId +
+                ", typeName='" + typeName + '\'' +
+                '}';
+    }
+
     public Integer getTypeId() {
         return typeId;
     }

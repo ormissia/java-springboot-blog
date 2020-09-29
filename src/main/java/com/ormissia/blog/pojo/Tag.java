@@ -13,6 +13,14 @@ public class Tag implements Serializable {
     private Integer tagId;//标签ID
     private String tagName;//标签名称
 
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "tagId=" + tagId +
+                ", tagName='" + tagName + '\'' +
+                '}';
+    }
+
     public Integer getTagId() {
         return tagId;
     }

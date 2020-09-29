@@ -26,6 +26,26 @@ public class Blog implements Serializable {
     private Integer publish;//发布标记，0/null-草稿，1-发布
     private Integer visits;//访客数量
 
+    @Override
+    public String toString() {
+        return "Blog{" +
+                "blogId='" + blogId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", typeId=" + typeId +
+                ", tagIds=" + tagIds +
+                ", blogTitle='" + blogTitle + '\'' +
+                ", description='" + description + '\'' +
+                ", blogContent='" + blogContent + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", lastEditDate='" + lastEditDate + '\'' +
+                ", deleteDate='" + deleteDate + '\'' +
+                ", deleted=" + deleted +
+                ", recommend=" + recommend +
+                ", publish=" + publish +
+                ", visits=" + visits +
+                '}';
+    }
+
     public String getBlogId() {
         return blogId;
     }

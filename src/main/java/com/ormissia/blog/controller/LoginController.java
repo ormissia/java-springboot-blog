@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -59,10 +56,17 @@ public class LoginController {
 
             //将用户信息添加到向前端的返回值中
             LinkedHashMap<String,String> data = new LinkedHashMap<>();
+            data.put("userId",isSuccessful.get("user"));
+            data.put("userRoleId",isSuccessful.get("userRoleId"));
+            data.put("username",isSuccessful.get("username"));
+            data.put("email",isSuccessful.get("email"));
+            data.put("phoneNumber",isSuccessful.get("phoneNumber"));
+            data.put("headPortrait",isSuccessful.get("headPortrait"));
+
+            //添加token
             data.put("token","123123123");
 
             result.put("data",data);
-
         }else {
             //用户不存在
             result.put(ReturnStatus.STATUS_RESPONSE_CODE_KEY,ReturnStatus.STATUS_LOGIN_USER_NOT_FOUND_VALUE);

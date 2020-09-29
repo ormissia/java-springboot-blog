@@ -20,6 +20,21 @@ public class User implements Serializable {
     private String registerDate;//注册时间
     private String lastEditPasswordDate;//最近修改密码的时间
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId='" + userId + '\'' +
+                ", userRoleId='" + userRoleId + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", headPortrait='" + headPortrait + '\'' +
+                ", registerDate='" + registerDate + '\'' +
+                ", lastEditPasswordDate='" + lastEditPasswordDate + '\'' +
+                '}';
+    }
+
     public String getUserId() {
         return userId;
     }

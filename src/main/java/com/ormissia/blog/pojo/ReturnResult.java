@@ -12,6 +12,15 @@ public class ReturnResult<T> implements Serializable {
     private String message;//提示信息
     private T data;//返回数据
 
+    @Override
+    public String toString() {
+        return "ReturnResult{" +
+                "code=" + code +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
+    }
+
     public Integer getCode() {
         return code;
     }
