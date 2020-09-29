@@ -1,12 +1,15 @@
 package com.ormissia.blog.pojo;
 
+import java.io.Serializable;
+
 /**
  * @Author 宋奕锟
  * @Date: Create in 2020/9/25 16:06
  * <p>
  * 用户实体类
  */
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String userId;//用户ID
     private String userRoleId;//用户权限ID
     private String username;//用户名

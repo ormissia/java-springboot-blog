@@ -1,12 +1,15 @@
 package com.ormissia.blog.pojo;
 
+import java.io.Serializable;
+
 /**
  * @Author 宋奕锟
  * @Date: Create in 2020/9/27 11:14
  * <p>
  * 博客标签实体类
  */
-public class Tag {
+public class Tag implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer tagId;//标签ID
     private String tagName;//标签名称
 

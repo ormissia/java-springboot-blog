@@ -1,5 +1,6 @@
 package com.ormissia.blog.pojo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,8 @@ import java.util.ArrayList;
  * <p>
  * 博客实体类
  */
-public class Blog {
+public class Blog implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String blogId;//博客ID
     private String userId;//博客所属用户ID
     private Integer typeId;//博客类型ID

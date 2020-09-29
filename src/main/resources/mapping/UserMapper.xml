@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ormissia.blog.dao.UserDao">
+
+    <resultMap id="User" type="com.ormissia.blog.pojo.User">
+        <id property="userId" column="userId"/>
+        <result property="userRoleId" column="userRoleId"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="phoneNumber" column="phoneNumber"/>
+        <result property="headPortrait" column="headPortrait"/>
+        <result property="registerDate" column="registerDate"/>
+        <result property="lastEditPasswordDate" column="lastEditPasswordDate"/>
+    </resultMap>
+
+    <!--增-->
+
+    <!--删-->
+
+    <!--查-->
+    <select id="selectUserByUsername" parameterType="java.lang.String" resultMap="User">
+        select *
+        from user
+        where user.username = #{username}
+    </select>
+
+    <!--改-->
+
+</mapper>
