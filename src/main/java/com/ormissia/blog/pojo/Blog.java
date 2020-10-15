@@ -12,38 +12,42 @@ import java.util.ArrayList;
 public class Blog implements Serializable {
     private static final long serialVersionUID = 1L;
     private String blogId;//博客ID
-    private String userId;//博客所属用户ID
-    private Integer typeId;//博客类型ID
-    private ArrayList<Tag> tagIds;//博客标签集合
+    private User user;//博客所属用户实体类
+    private Type type;//博客类型实体类
+    private ArrayList<Tag> tags;//博客标签实体类集合
     private String blogTitle;//博客标题
     private String description;//博客描述
     private String blogContent;//博客内容
     private String createDate;//创建时间
     private String lastEditDate;//上一次修改时间
     private String deleteDate;//删除时间
-    private Integer deleted;//删除标记，0/null-未删除，1-删除
-    private Integer recommend;//推荐标记，0/null-普通，1-推荐
-    private Integer publish;//发布标记，0/null-草稿，1-发布
+    private Integer isDeleted;//删除标记，0/null-未删除，1-删除
+    private Integer isRecommend;//推荐标记，0/null-普通，1-推荐
+    private Integer isPublished;//发布标记，0/null-草稿，1-发布
     private Integer visits;//访客数量
 
     @Override
     public String toString() {
         return "Blog{" +
                 "blogId='" + blogId + '\'' +
-                ", userId='" + userId + '\'' +
-                ", typeId=" + typeId +
-                ", tagIds=" + tagIds +
+                ", user=" + user +
+                ", type=" + type +
+                ", tags=" + tags +
                 ", blogTitle='" + blogTitle + '\'' +
                 ", description='" + description + '\'' +
                 ", blogContent='" + blogContent + '\'' +
                 ", createDate='" + createDate + '\'' +
                 ", lastEditDate='" + lastEditDate + '\'' +
                 ", deleteDate='" + deleteDate + '\'' +
-                ", deleted=" + deleted +
-                ", recommend=" + recommend +
-                ", publish=" + publish +
+                ", isDeleted=" + isDeleted +
+                ", isRecommend=" + isRecommend +
+                ", isPublished=" + isPublished +
                 ", visits=" + visits +
                 '}';
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public String getBlogId() {
@@ -54,28 +58,28 @@ public class Blog implements Serializable {
         this.blogId = blogId;
     }
 
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getTypeId() {
-        return typeId;
+    public Type getType() {
+        return type;
     }
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
+    public void setType(Type type) {
+        this.type = type;
     }
 
-    public ArrayList<Tag> getTagIds() {
-        return tagIds;
+    public ArrayList<Tag> getTags() {
+        return tags;
     }
 
-    public void setTagIds(ArrayList<Tag> tagIds) {
-        this.tagIds = tagIds;
+    public void setTags(ArrayList<Tag> tags) {
+        this.tags = tags;
     }
 
     public String getBlogTitle() {
@@ -126,28 +130,28 @@ public class Blog implements Serializable {
         this.deleteDate = deleteDate;
     }
 
-    public Integer getDeleted() {
-        return deleted;
+    public Integer getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
-    public Integer getRecommend() {
-        return recommend;
+    public Integer getIsRecommend() {
+        return isRecommend;
     }
 
-    public void setRecommend(Integer recommend) {
-        this.recommend = recommend;
+    public void setIsRecommend(Integer isRecommend) {
+        this.isRecommend = isRecommend;
     }
 
-    public Integer getPublish() {
-        return publish;
+    public Integer getIsPublished() {
+        return isPublished;
     }
 
-    public void setPublish(Integer publish) {
-        this.publish = publish;
+    public void setIsPublished(Integer isPublished) {
+        this.isPublished = isPublished;
     }
 
     public Integer getVisits() {

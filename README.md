@@ -2,6 +2,8 @@
 
 ## 我的博客后端项目
 
+#### TODO
+- 博客表需要添加字段区分发布和草稿的状态
 ---
 ### 创建表结构的SQL
 ###### 按顺序创建
@@ -49,7 +51,7 @@ CREATE TABLE blog_information
     `pk_blog_id`     varchar(100) NOT NULL COMMENT '博客ID',
     `user_id`        varchar(100) NOT NULL COMMENT '博客所属用户的ID',
     `type_id`        int          DEFAULT NULL COMMENT '类型ID，默认为-1，即无类型',
-    `blog_Title`     varchar(100) NOT NULL COMMENT '博客标题',
+    `blog_title`     varchar(100) NOT NULL COMMENT '博客标题',
     `description`    varchar(255) NOT NULL COMMENT '博客描述',
     `create_date`    varchar(100) NOT NULL COMMENT '创建时间',
     `last_edit_date` varchar(100) DEFAULT NULL COMMENT '上一次修改时间',
@@ -70,9 +72,9 @@ CREATE TABLE blog_information
 -- 博客内容表
 CREATE TABLE `blog_content`
 (
-    `blog_id`    varchar(100) NOT NULL COMMENT '博客ID，外键关联blog_information表的blog_id',
-    `content`    text COMMENT '博客内容',
-    `is_deleted` int DEFAULT NULL COMMENT '是否被删除，0或NULL-否，1-被删除',
+    `blog_id`      varchar(100) NOT NULL COMMENT '博客ID，外键关联blog_information表的blog_id',
+    `blog_content` text COMMENT '博客内容',
+    `is_deleted`   int DEFAULT NULL COMMENT '是否被删除，0或NULL-否，1-被删除',
     KEY `blog_content_FK` (`blog_id`),
     CONSTRAINT `blog_content_FK` FOREIGN KEY (`blog_id`) REFERENCES `blog_information` (`pk_blog_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB

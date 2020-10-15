@@ -3,7 +3,7 @@
 
 <mapper namespace="com.ormissia.blog.dao.UserDao">
 
-    <resultMap id="User" type="com.ormissia.blog.pojo.User">
+    <resultMap id="user" type="com.ormissia.blog.pojo.User">
         <id property="userId" column="pk_user_id"/>
         <result property="userRoleId" column="user_role_id"/>
         <result property="username" column="username"/>
@@ -20,7 +20,7 @@
     <!--删-->
 
     <!--查-->
-    <select id="selectUserByUsername" parameterType="java.lang.String" resultMap="User">
+    <select id="selectUserByUsername" parameterType="java.lang.String" resultMap="user">
         select *
         from user
         where user.username = #{username}

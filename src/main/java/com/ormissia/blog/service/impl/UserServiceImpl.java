@@ -2,7 +2,7 @@ package com.ormissia.blog.service.impl;
 
 import com.ormissia.blog.dao.UserDao;
 import com.ormissia.blog.pojo.User;
-import com.ormissia.blog.service.LoginService;
+import com.ormissia.blog.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 
 @Service("LoginService")
-public class LoginServiceImpl implements LoginService {
+public class UserServiceImpl implements UserService {
 
     @Resource
     private UserDao userDao;

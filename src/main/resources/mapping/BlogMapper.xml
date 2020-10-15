@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ormissia.blog.dao.BlogDao">
+
+    <!--博客返回对象-->
+    <resultMap id="blog" type="com.ormissia.blog.pojo.Blog">
+        <id property="blogId" column="pk_blog_id"/>
+        <result property="blogTitle" column="blog_Title"/>
+        <result property="description" column="description"/>
+        <result property="blogContent" column="blog_content"/>
+        <result property="createDate" column="create_date"/>
+        <result property="lastEditDate" column="last_edit_date"/>
+        <result property="deleteDate" column="delete_date"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="isRecommend" column="is_recommended"/>
+        <result property="isPublished" column="is_published"/>
+        <result property="visits" column="visits"/>
+        <collection property="user" resultMap="user"/>
+        <collection property="type" resultMap="type"/>
+        <collection property="tags" resultMap="tags"/>
+    </resultMap>
+    <!--用户对象-->
+    <resultMap id="user" type="com.ormissia.blog.pojo.User">
+        <id property="userId" column="pk_user_id"/>
+        <result property="userRoleId" column="user_role_id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="headPortrait" column="head_portrait"/>
+        <result property="registerDate" column="register_date"/>
+        <result property="lastEditPasswordDate" column="last_edit_password_date"/>
+    </resultMap>
+    <!--类型对象-->
+    <resultMap id="type" type="com.ormissia.blog.pojo.Type">
+        <id property="typeId" column="pk_type_id"/>
+        <result property="typeName" column="type_name"/>
+    </resultMap>
+    <!--标签对象-->
+    <resultMap id="tags" type="com.ormissia.blog.pojo.Tag">
+        <id property="tagId" column="pk_tag_id"/>
+        <result property="tagName" column="tag_name"/>
+    </resultMap>
+
+    <!--增-->
+    <!--保存博客详细信息-->
+    <insert id="saveBlogInformation">
+        insert into blog_information(pk_blog_id, user_id, type_id, blog_title, description, create_date, is_recommended,
+                                     is_published)
+            VALUE (#{blog.blogId}, #{blog.user.userId}, #{blog.type.typeId}, #{blog.blogTitle}, #{blog.description},
+                   #{blog.createDate}, #{blog.isRecommend}, #{blog.isPublished})
+    </insert>
+    <!--保存博客内容-->
+    <insert id="saveBlogContent">
+        insert into blog_content(blog_id, blog_content) VALUE (#{blog.blogId}, #{blog.blogContent})
+    </insert>
+    <!--保存博客标签-->
+    <!--    <insert id="saveBlogTags">-->
+    <!--        insert into blog_tag(blog_id, tag_id) VALUE(#) -->
+    <!--    </insert>-->
+
+    <!--删-->
+
+    <!--查-->
+    <select id="selectBlogByBlogId" parameterType="java.lang.String" resultMap="blog">
+        select pk_blog_id,
+               blog_title,
+               description,
+               blog_content,
+               create_date,
+               last_edit_date,
+               is_recommended,
+               is_published,
+               visits,
+               pk_user_id,
+               username,
+               pk_type_id,
+               type_name,
+               pk_tag_id,
+               tag_name
+        from blog_information bi
+                 left join blog_content bc on bi.pk_blog_id = bc.blog_id
+                 left outer join user u on u.pk_user_id = bi.user_id
+                 left outer join type t on t.pk_type_id = bi.type_id
+                 left join blog_tag bt on bi.pk_blog_id = bt.blog_id
+                 left join tag t2 on t2.pk_tag_id = bt.tag_id
+        where pk_blog_id = #{blogId}
+    </select>
+
+    <!--改-->
+    <!--修改博客-->
+    <update id="updateBlog" parameterType="com.ormissia.blog.pojo.Blog">
+        update blog_information bi left join blog_content bc
+        on bi.pk_blog_id = bc.blog_id
+        set pk_blog_id = pk_blog_id,
+        <if test="blog.blogTitle != null and blog.blogTitle != null">
+            blog_title= #{blog.blogTitle},
+        </if>
+        <if test="blog.lastEditDate != null and blog.lastEditDate != null">
+            last_edit_date = #{blog.lastEditDate},
+        </if>
+        <if test="blog.isRecommend != null and blog.isRecommend != null">
+            is_recommended = #{blog.isRecommend},
+        </if>
+        <if test="blog.isPublished != null and blog.isPublished != null">
+            is_published = #{blog.isPublished},
+        </if>
+        <if test="blog.type != null and blog.type != null">
+            type_id = #{blog.type.typeId},
+        </if>
+        <if test="blog.blogContent != null and blog.blogContent != null">
+            blog_content = #{blog.blogContent},
+        </if>
+        create_date = create_date
+        where pk_blog_id = #{blog.blogId}
+    </update>
+
+</mapper>
