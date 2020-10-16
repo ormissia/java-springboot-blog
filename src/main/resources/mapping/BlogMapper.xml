@@ -45,14 +45,14 @@
 
     <!--增-->
     <!--保存博客详细信息-->
-    <insert id="saveBlogInformation">
+    <insert id="insertBlogInformation">
         insert into blog_information(pk_blog_id, user_id, type_id, blog_title, description, create_date, is_recommended,
                                      is_published)
             VALUE (#{blog.blogId}, #{blog.user.userId}, #{blog.type.typeId}, #{blog.blogTitle}, #{blog.description},
                    #{blog.createDate}, #{blog.isRecommend}, #{blog.isPublished})
     </insert>
     <!--保存博客内容-->
-    <insert id="saveBlogContent">
+    <insert id="insertBlogContent">
         insert into blog_content(blog_id, blog_content) VALUE (#{blog.blogId}, #{blog.blogContent})
     </insert>
     <!--保存博客标签-->
@@ -63,6 +63,7 @@
     <!--删-->
 
     <!--查-->
+    <!--根据博客Id查询博客信息-->
     <select id="selectBlogByBlogId" parameterType="java.lang.String" resultMap="blog">
         select pk_blog_id,
                blog_title,
@@ -87,29 +88,51 @@
                  left join tag t2 on t2.pk_tag_id = bt.tag_id
         where pk_blog_id = #{blogId}
     </select>
+    <!--根据分页信息查询博客列表,模糊查询采用MySQL的concat函数-->
+    <select id="selectBlogByPage" parameterType="java.util.HashMap" resultMap="blog">
+        select pk_blog_id,
+        blog_title,
+        create_date,
+        last_edit_date,
+        is_published,
+        pk_type_id,
+        type_name,
+        pk_tag_id,
+        tag_name
+        from blog_information bi
+        left outer join type t on t.pk_type_id = bi.type_id
+        left join blog_tag bt on bi.pk_blog_id = bt.blog_id
+        left join tag t2 on t2.pk_tag_id = bt.tag_id
+        <if test="page.queryStr != null and page.queryStr != ''">
+            where blog_title like concat('%', #{page.queryStr}, '%')
+        </if>
+        order by ifnull(last_edit_date, create_date) desc
+        limit #{page.pageNum},#{page.pageSize}
+    </select>
 
     <!--改-->
     <!--修改博客-->
+    <!--update的值为Boolean类型时MyBatis只判断是否等于null-->
     <update id="updateBlog" parameterType="com.ormissia.blog.pojo.Blog">
         update blog_information bi left join blog_content bc
         on bi.pk_blog_id = bc.blog_id
         set pk_blog_id = pk_blog_id,
-        <if test="blog.blogTitle != null and blog.blogTitle != null">
+        <if test="blog.blogTitle != null and blog.blogTitle != ''">
             blog_title= #{blog.blogTitle},
         </if>
-        <if test="blog.lastEditDate != null and blog.lastEditDate != null">
+        <if test="blog.lastEditDate != null and blog.lastEditDate != ''">
             last_edit_date = #{blog.lastEditDate},
         </if>
-        <if test="blog.isRecommend != null and blog.isRecommend != null">
+        <if test="blog.isRecommend != null and blog.isRecommend != ''">
             is_recommended = #{blog.isRecommend},
         </if>
-        <if test="blog.isPublished != null and blog.isPublished != null">
+        <if test="blog.isPublished != null">
             is_published = #{blog.isPublished},
         </if>
-        <if test="blog.type != null and blog.type != null">
+        <if test="blog.type != null and blog.type != ''">
             type_id = #{blog.type.typeId},
         </if>
-        <if test="blog.blogContent != null and blog.blogContent != null">
+        <if test="blog.blogContent != null and blog.blogContent != ''">
             blog_content = #{blog.blogContent},
         </if>
         create_date = create_date

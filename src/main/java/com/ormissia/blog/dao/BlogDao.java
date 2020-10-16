@@ -4,6 +4,9 @@ import com.ormissia.blog.pojo.Blog;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * @Author 安红豆
  * @Date: Create in 2020/10/14 18:34
@@ -28,6 +31,8 @@ public interface BlogDao {
     //查
     //根据博客Id查询博客信息
     Blog selectBlogByBlogId(@Param("blogId") String blogId);
+    ArrayList<Blog> selectBlogByPage(@Param("page") HashMap<String,Object> page);
+
 
     //改
     //修改博客信息

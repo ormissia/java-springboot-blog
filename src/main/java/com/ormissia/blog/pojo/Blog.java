@@ -22,8 +22,8 @@ public class Blog implements Serializable {
     private String lastEditDate;//上一次修改时间
     private String deleteDate;//删除时间
     private Integer isDeleted;//删除标记，0/null-未删除，1-删除
-    private Integer isRecommend;//推荐标记，0/null-普通，1-推荐
-    private Integer isPublished;//发布标记，0/null-草稿，1-发布
+    private Boolean isRecommend;//推荐标记，0/null-普通，1-推荐
+    private Boolean isPublished;//发布标记，0/null-草稿，1-发布
     private Integer visits;//访客数量
 
     @Override
@@ -138,20 +138,20 @@ public class Blog implements Serializable {
         this.isDeleted = isDeleted;
     }
 
-    public Integer getIsRecommend() {
+    public Boolean getRecommend() {
         return isRecommend;
     }
 
-    public void setIsRecommend(Integer isRecommend) {
-        this.isRecommend = isRecommend;
+    public void setRecommend(Boolean recommend) {
+        isRecommend = recommend;
     }
 
-    public Integer getIsPublished() {
+    public Boolean getPublished() {
         return isPublished;
     }
 
-    public void setIsPublished(Integer isPublished) {
-        this.isPublished = isPublished;
+    public void setPublished(Boolean published) {
+        isPublished = published;
     }
 
     public Integer getVisits() {

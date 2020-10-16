@@ -4,8 +4,11 @@ import com.ormissia.blog.dao.BlogDao;
 import com.ormissia.blog.pojo.Blog;
 import com.ormissia.blog.service.BlogService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @Author 安红豆
@@ -17,9 +20,13 @@ public class BlogServiceImpl implements BlogService {
     @Resource
     private BlogDao blogDao;
 
-    //博客保存接口
+    //博客保存接口，并且添加事务
     @Override
+    @Transactional
     public Integer insertBlog(Blog blog) {
+
+        //先判断是否有之前不存在的type和tags
+
         //分别调用对应的方法保存博客信息到相应的表
         //保存博客信息
         blogDao.insertBlogInformation(blog);
@@ -34,6 +41,7 @@ public class BlogServiceImpl implements BlogService {
 
     //博客修改接口
     @Override
+    @Transactional
     public Integer updateBlog(Blog blog) {
         //修改博客信息
         blogDao.updateBlog(blog);
@@ -47,5 +55,12 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Blog selectBlogByBlogId(String blogId) {
         return blogDao.selectBlogByBlogId(blogId);
+    }
+
+    //根据分页查询博客列表
+    @Override
+    public ArrayList<Blog> selectBlogByPage(HashMap<String, Object> page) {
+        ArrayList<Blog> blogList= blogDao.selectBlogByPage(page);
+        return blogList;
     }
 }

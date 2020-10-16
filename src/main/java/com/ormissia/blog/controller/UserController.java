@@ -34,8 +34,8 @@ public class UserController {
     public ReturnResult<LinkedHashMap<String, Object>> login(@RequestBody HashMap<String, Object> requestBody) {
         ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();
 
-        String username = String.valueOf(requestBody.get("username"));
-        String password = String.valueOf(requestBody.get("password"));
+        String username = (String) requestBody.get("username");
+        String password = (String) requestBody.get("password");
         //获取登录返回值
         HashMap<String, String> isSuccessful = userService.userLogin(username, password);//判断是否登录成功
 
