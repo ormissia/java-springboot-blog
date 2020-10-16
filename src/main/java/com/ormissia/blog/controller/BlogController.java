@@ -33,16 +33,16 @@ public class BlogController {
         ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();
 
         //解析博客相关属性
-        String blogId = String.valueOf(requestBody.get("blogId"));
-        String blogTitle = String.valueOf(requestBody.get("blogTitle"));
-        String description = String.valueOf(requestBody.get("description"));
-        String blogContent = String.valueOf(requestBody.get("blogContent"));
-        Integer isPublished = (Integer) requestBody.get("isPublished");
-        Integer isRecommend = (boolean) requestBody.get("isRecommend") ? 1 : 0;
+        String blogId = (String) requestBody.get("blogId");
+        String blogTitle = (String) requestBody.get("blogTitle");
+        String description = (String) requestBody.get("description");
+        String blogContent = (String) requestBody.get("blogContent");
+        Boolean isPublished = (Boolean) requestBody.get("isPublished");
+        Boolean isRecommend = (Boolean) requestBody.get("isRecommend");
         //解析user相关属性
-        String userId = String.valueOf(requestBody.get("userId"));
+        String userId = (String) requestBody.get("userId");
         //解析type相关属性
-        String typeName = String.valueOf(requestBody.get("blogType"));
+        String typeName = (String) requestBody.get("blogType");
         //解析tags相关属性
         ArrayList<String> tagsName = (ArrayList<String>) requestBody.get("blogTags");
 
@@ -78,8 +78,8 @@ public class BlogController {
         blog.setBlogTitle(blogTitle);
         blog.setDescription(description);
         blog.setBlogContent(blogContent);
-        blog.setIsRecommend(isRecommend);
-        blog.setIsPublished(isPublished);
+        blog.setRecommend(isRecommend);
+        blog.setPublished(isPublished);
 
         user.setUserId(userId);
 
@@ -101,7 +101,7 @@ public class BlogController {
     @RequestMapping(value = "/selectBlogByBlogId", method = RequestMethod.POST)
     @ApiOperation("根据博客Id来查询博客的接口")
     @ApiImplicitParam(name = "blogId", value = "博客Id", required = true, dataType = "String")
-    public ReturnResult<Blog> saveBlog(@RequestParam("blogId") String blogId) {
+    public ReturnResult<Blog> selectBlogByBlogId(String blogId) {
         ReturnResult<Blog> result = new ReturnResult<>();
 
         //调用Service层接口查询Blog信息
@@ -111,6 +111,32 @@ public class BlogController {
         result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);
         result.setMessage("查询成功");
         result.setData(blog);
+        return result;
+    }
+
+    //按照分页参数查询博客列表
+    @RequestMapping(value = "/selectBlogByPage", method = RequestMethod.POST)
+    @ApiOperation("根据分页数据来查询博客的接口")
+    public ReturnResult<ArrayList<Blog>> selectBlogByPage(@RequestBody HashMap<String, Object> requestBody) {
+        ReturnResult<ArrayList<Blog>> result = new ReturnResult<>();
+
+        //获取请求参数
+        String queryStr = (String) requestBody.get("queryStr");
+        Integer pageNum = (Integer) requestBody.get("pageNum");
+        Integer pageSize = (Integer) requestBody.get("pageSize");
+
+        //创建page的HashMap，用于分页查询参数
+        HashMap<String, Object> page = new HashMap<>();
+        page.put("queryStr", queryStr);
+        page.put("pageNum", (pageNum - 1) * pageSize);
+        page.put("pageSize", pageSize);
+        ArrayList<Blog> blogList = blogService.selectBlogByPage(page);
+
+        //给返回结果对象赋值
+        result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);
+        result.setMessage("查询成功");
+        result.setData(blogList);
+
         return result;
     }
 
