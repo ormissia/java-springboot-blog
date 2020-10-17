@@ -117,25 +117,37 @@ public class BlogController {
     //按照分页参数查询博客列表
     @RequestMapping(value = "/selectBlogByPage", method = RequestMethod.POST)
     @ApiOperation("根据分页数据来查询博客的接口")
-    public ReturnResult<ArrayList<Blog>> selectBlogByPage(@RequestBody HashMap<String, Object> requestBody) {
-        ReturnResult<ArrayList<Blog>> result = new ReturnResult<>();
+    public ReturnResult<LinkedHashMap<String, Object>> selectBlogByPage(@RequestBody HashMap<String, Object> requestBody) {
+        ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();
+        //用于存放列表数据和博客总数
+        LinkedHashMap<String, Object> data = new LinkedHashMap<>();
 
         //获取请求参数
         String queryStr = (String) requestBody.get("queryStr");
         Integer pageNum = (Integer) requestBody.get("pageNum");
         Integer pageSize = (Integer) requestBody.get("pageSize");
+        Boolean isDeleted = (Boolean) requestBody.get("isDeleted");
 
         //创建page的HashMap，用于分页查询参数
         HashMap<String, Object> page = new HashMap<>();
         page.put("queryStr", queryStr);
         page.put("pageNum", (pageNum - 1) * pageSize);
         page.put("pageSize", pageSize);
+        page.put("isDeleted", isDeleted);
+
+        //查询当前页页的博客列表
         ArrayList<Blog> blogList = blogService.selectBlogByPage(page);
+
+        //查询博客总数
+        Integer total = blogService.selectBlogTotal(isDeleted);
+
+        data.put("total", total);
+        data.put("blogList", blogList);
 
         //给返回结果对象赋值
         result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);
         result.setMessage("查询成功");
-        result.setData(blogList);
+        result.setData(data);
 
         return result;
     }

@@ -29,8 +29,11 @@ public interface BlogDao {
     Integer deleteBlogTags(@Param("blog") Blog blog);
 
     //查
+    //统计博客总数，是否统计未删除的根据参数决定
+    Integer selectBlogTotal(@Param("isDeleted") Boolean isDeleted);
     //根据博客Id查询博客信息
     Blog selectBlogByBlogId(@Param("blogId") String blogId);
+    //根据分页参数查询博客列表
     ArrayList<Blog> selectBlogByPage(@Param("page") HashMap<String,Object> page);
 
 

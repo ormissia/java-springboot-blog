@@ -51,6 +51,12 @@ public class BlogServiceImpl implements BlogService {
         return null;
     }
 
+    @Override
+    public Integer selectBlogTotal(Boolean isDeleted) {
+        Integer total = blogDao.selectBlogTotal(isDeleted);
+        return total;
+    }
+
     //根据博客Id查询博客信息
     @Override
     public Blog selectBlogByBlogId(String blogId) {

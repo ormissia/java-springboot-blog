@@ -63,6 +63,20 @@
     <!--删-->
 
     <!--查-->
+    <!--统计博客总数，是否统计未删除的根据参数决定-->
+    <select id="selectBlogTotal" parameterType="java.lang.Boolean" resultType="java.lang.Integer">
+        select count(pk_blog_id)
+        from blog_information
+        where 1=1
+        <choose>
+            <when test="isDeleted">
+                and is_deleted is true
+            </when>
+            <otherwise>
+                and is_deleted is not true
+            </otherwise>
+        </choose>
+    </select>
     <!--根据博客Id查询博客信息-->
     <select id="selectBlogByBlogId" parameterType="java.lang.String" resultMap="blog">
         select pk_blog_id,
@@ -92,6 +106,7 @@
     <select id="selectBlogByPage" parameterType="java.util.HashMap" resultMap="blog">
         select pk_blog_id,
         blog_title,
+        description,
         create_date,
         last_edit_date,
         is_published,
@@ -103,8 +118,17 @@
         left outer join type t on t.pk_type_id = bi.type_id
         left join blog_tag bt on bi.pk_blog_id = bt.blog_id
         left join tag t2 on t2.pk_tag_id = bt.tag_id
+        where 1=1
+        <choose>
+            <when test="page.isDeleted">
+                and bi.is_deleted is true
+            </when>
+            <otherwise>
+                and bi.is_deleted is not true
+            </otherwise>
+        </choose>
         <if test="page.queryStr != null and page.queryStr != ''">
-            where blog_title like concat('%', #{page.queryStr}, '%')
+            and blog_title like concat('%', #{page.queryStr}, '%')
         </if>
         order by ifnull(last_edit_date, create_date) desc
         limit #{page.pageNum},#{page.pageSize}
