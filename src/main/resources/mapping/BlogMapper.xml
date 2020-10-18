@@ -69,13 +69,16 @@
         from blog_information
         where 1=1
         <choose>
-            <when test="isDeleted">
+            <when test="page.isDeleted">
                 and is_deleted is true
             </when>
             <otherwise>
                 and is_deleted is not true
             </otherwise>
         </choose>
+        <if test="page.queryStr != null and page.queryStr != ''">
+            and blog_title like concat('%', #{page.queryStr}, '%')
+        </if>
     </select>
     <!--根据博客Id查询博客信息-->
     <select id="selectBlogByBlogId" parameterType="java.lang.String" resultMap="blog">
@@ -147,7 +150,7 @@
         <if test="blog.lastEditDate != null and blog.lastEditDate != ''">
             last_edit_date = #{blog.lastEditDate},
         </if>
-        <if test="blog.isRecommend != null and blog.isRecommend != ''">
+        <if test="blog.isRecommend != null">
             is_recommended = #{blog.isRecommend},
         </if>
         <if test="blog.isPublished != null">

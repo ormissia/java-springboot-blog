@@ -52,9 +52,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Integer selectBlogTotal(Boolean isDeleted) {
-        Integer total = blogDao.selectBlogTotal(isDeleted);
-        return total;
+    public Integer selectBlogTotal(HashMap<String, Object> page) {
+        return blogDao.selectBlogTotal(page);
     }
 
     //根据博客Id查询博客信息
@@ -66,7 +65,6 @@ public class BlogServiceImpl implements BlogService {
     //根据分页查询博客列表
     @Override
     public ArrayList<Blog> selectBlogByPage(HashMap<String, Object> page) {
-        ArrayList<Blog> blogList= blogDao.selectBlogByPage(page);
-        return blogList;
+        return blogDao.selectBlogByPage(page);
     }
 }

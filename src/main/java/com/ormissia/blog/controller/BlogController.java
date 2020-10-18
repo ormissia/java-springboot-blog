@@ -139,7 +139,7 @@ public class BlogController {
         ArrayList<Blog> blogList = blogService.selectBlogByPage(page);
 
         //查询博客总数
-        Integer total = blogService.selectBlogTotal(isDeleted);
+        Integer total = blogService.selectBlogTotal(page);
 
         data.put("total", total);
         data.put("blogList", blogList);
