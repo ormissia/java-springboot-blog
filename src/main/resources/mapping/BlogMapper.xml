@@ -76,6 +76,11 @@
                 and is_deleted is not true
             </otherwise>
         </choose>
+        <choose>
+            <when test="page.isRecommend">
+                and is_recommended is true
+            </when>
+        </choose>
         <if test="page.queryStr != null and page.queryStr != ''">
             and blog_title like concat('%', #{page.queryStr}, '%')
         </if>
@@ -129,6 +134,11 @@
             <otherwise>
                 and bi.is_deleted is not true
             </otherwise>
+        </choose>
+        <choose>
+            <when test="page.isRecommend">
+                and bi.is_recommended is true
+            </when>
         </choose>
         <if test="page.queryStr != null and page.queryStr != ''">
             and blog_title like concat('%', #{page.queryStr}, '%')

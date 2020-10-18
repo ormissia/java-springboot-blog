@@ -127,6 +127,7 @@ public class BlogController {
         Integer pageNum = (Integer) requestBody.get("pageNum");
         Integer pageSize = (Integer) requestBody.get("pageSize");
         Boolean isDeleted = (Boolean) requestBody.get("isDeleted");
+        Boolean isRecommend = (Boolean) requestBody.get("isRecommend");
 
         //创建page的HashMap，用于分页查询参数
         HashMap<String, Object> page = new HashMap<>();
@@ -134,6 +135,7 @@ public class BlogController {
         page.put("pageNum", (pageNum - 1) * pageSize);
         page.put("pageSize", pageSize);
         page.put("isDeleted", isDeleted);
+        page.put("isRecommend",isRecommend);
 
         //查询当前页页的博客列表
         ArrayList<Blog> blogList = blogService.selectBlogByPage(page);
