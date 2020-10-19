@@ -13,7 +13,6 @@ import java.util.HashMap;
  * <p>
  * 对博客相关的CRUD操作
  */
-@Mapper
 public interface BlogDao {
 
     //增

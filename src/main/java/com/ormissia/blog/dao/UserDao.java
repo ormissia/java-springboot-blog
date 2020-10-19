@@ -7,8 +7,9 @@ import org.apache.ibatis.annotations.Param;
 /**
  * @Author 宋奕锟
  * @Date: Create in 2020/9/27 14:45
+ *
+ * 对用户相关的CRUD操作
  */
-@Mapper
 public interface UserDao {
     //增
 
