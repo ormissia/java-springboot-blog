@@ -48,23 +48,19 @@
     <insert id="insertBlogInformation">
         insert into blog_information(pk_blog_id, user_id, type_id, blog_title, description, create_date, is_recommended,
                                      is_published)
-            VALUE (#{blog.blogId}, #{blog.user.userId}, #{blog.type.typeId}, #{blog.blogTitle}, #{blog.description},
+            value (#{blog.blogId}, #{blog.user.userId}, #{blog.type.typeId}, #{blog.blogTitle}, #{blog.description},
                    #{blog.createDate}, #{blog.isRecommend}, #{blog.isPublished})
     </insert>
     <!--保存博客内容-->
     <insert id="insertBlogContent">
         insert into blog_content(blog_id, blog_content) VALUE (#{blog.blogId}, #{blog.blogContent})
     </insert>
-    <!--保存博客标签-->
-    <!--    <insert id="saveBlogTags">-->
-    <!--        insert into blog_tag(blog_id, tag_id) VALUE(#) -->
-    <!--    </insert>-->
 
     <!--删-->
 
     <!--查-->
     <!--统计博客总数，是否统计未删除的根据参数决定-->
-    <select id="selectBlogTotal" parameterType="java.lang.Boolean" resultType="java.lang.Integer">
+    <select id="selectBlogTotal" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         select count(pk_blog_id)
         from blog_information
         where 1=1

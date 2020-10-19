@@ -51,6 +51,7 @@ public class BlogServiceImpl implements BlogService {
         return null;
     }
 
+    //查询博客总数
     @Override
     public Integer selectBlogTotal(HashMap<String, Object> page) {
         return blogDao.selectBlogTotal(page);

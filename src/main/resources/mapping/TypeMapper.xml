@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ormissia.blog.dao.TypeDao">
+
+    <!--类型对象-->
+    <resultMap id="type" type="com.ormissia.blog.pojo.Type">
+        <id property="typeId" column="pk_type_id"/>
+        <result property="typeName" column="type_name"/>
+    </resultMap>
+
+    <!--增-->
+    <insert id="insertType">
+        insert into type (type_name)
+            value (#{type.typeName})
+    </insert>
+
+    <!--删-->
+
+    <!--查-->
+    <select id="selectTypeTotal" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(pk_type_id)
+        from type
+        where 1 = 1
+        <if test="page.queryStr != null and page.queryStr != ''">
+            and type_name like concat('%', #{page.queryStr}, '%')
+        </if>
+    </select>
+
+    <!--根据分页参数查寻类型列表-->
+    <select id="selectTypeByPage" parameterType="java.util.HashMap" resultMap="type">
+        select pk_type_id, type_name
+        from type
+        where 1 = 1
+        <if test="page.queryStr != null and page.queryStr != ''">
+            and type_name like concat('%', #{page.queryStr}, '%')
+        </if>
+        limit #{page.pageNum},#{page.pageSize}
+    </select>
+
+    <!--改-->
+    <update id="updateType" parameterType="com.ormissia.blog.pojo.Type">
+        update type
+        set type_name = #{type.typeName}
+        where pk_type_id = #{type.typeId}
+    </update>
+
+</mapper>

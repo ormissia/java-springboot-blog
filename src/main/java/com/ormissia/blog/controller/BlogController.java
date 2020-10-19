@@ -29,8 +29,8 @@ public class BlogController {
     //新增或修改博客
     @RequestMapping(value = "/saveBlog", method = RequestMethod.POST)
     @ApiOperation("保存博客的接口")
-    public ReturnResult<LinkedHashMap<String, Object>> saveBlog(@RequestBody HashMap<String, Object> requestBody) {
-        ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();
+    public ReturnResult<String> saveBlog(@RequestBody HashMap<String, Object> requestBody) {
+        ReturnResult<String> result = new ReturnResult<>();
 
         //解析博客相关属性
         String blogId = (String) requestBody.get("blogId");
@@ -62,7 +62,7 @@ public class BlogController {
         boolean newBlogFlag = true;
 
         //给用于保存的blog对象赋值
-        //判断BlogId是否为空，如果为空则是新创建的博客
+        //判断blogId是否为空，如果为空则是新创建的博客
         if (blogId == null || "".equals(blogId)) {
             //blogId为空，则生成新的blogId
             blog.setBlogId(String.valueOf(UUID.randomUUID()));

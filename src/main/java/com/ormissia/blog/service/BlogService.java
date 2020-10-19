@@ -17,7 +17,7 @@ public interface BlogService {
     //博客新增接口
     Integer insertBlog(Blog blog);
 
-    //博客保存接口
+    //博客修改接口
     Integer updateBlog(Blog blog);
 
     //博客查询接口
