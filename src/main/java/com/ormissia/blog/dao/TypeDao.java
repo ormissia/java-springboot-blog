@@ -17,6 +17,7 @@ import java.util.HashMap;
 public interface TypeDao {
 
     //增
+    //插入类型
     Integer insertType(@Param("type") Type type);
 
     //删
@@ -29,5 +30,6 @@ public interface TypeDao {
     ArrayList<Type> selectTypeByPage(@Param("page") HashMap<String, Object> page);
 
     //改
+    //修改类型信息
     Integer updateType(@Param("type") Type type);
 }

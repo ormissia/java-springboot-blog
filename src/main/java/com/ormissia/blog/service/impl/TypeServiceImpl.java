@@ -34,7 +34,7 @@ public class TypeServiceImpl implements TypeService {
     }
 
     //类型查询接口
-
+    //类型总量查询
     @Override
     public Integer selectTypeTotal(HashMap<String, Object> page) {
         return typeDao.selectTypeTotal(page);

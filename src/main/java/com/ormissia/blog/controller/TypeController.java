@@ -35,17 +35,12 @@ public class TypeController {
     //新增或修改类型
     @RequestMapping(value = "createNewType", method = RequestMethod.POST)
     @ApiOperation("保存类型的接口")
-    public ReturnResult<String> saveBlog(@RequestBody HashMap<String, Object> requestBody) {
+    public ReturnResult<String> createNewType(@RequestBody HashMap<String, Object> requestBody) {
         ReturnResult<String> result = new ReturnResult<>();
 
         //解析类型相关属性
         Integer typeId = (Integer) requestBody.get("typeId");
         String typeName = (String) requestBody.get("typeName");
-
-        //获取当前时间
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        String now = simpleDateFormat.format(date);
 
         //创建用于保存的Type对象
         Type type = new Type();
@@ -70,26 +65,24 @@ public class TypeController {
         return result;
     }
 
-    //按照分页参数查询博客列表
+    //按照分页参数查询类型列表
     @RequestMapping(value = "/selectTypeByPage", method = RequestMethod.POST)
     @ApiOperation("根据分页数据来查询类型的接口")
     public ReturnResult<LinkedHashMap<String, Object>> selectTypeByPage(@RequestBody HashMap<String, Object> requestBody) {
         ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();
-        //用于存放列表数据和博客总数
+        //用于存放列表数据和类型总数
         LinkedHashMap<String, Object> data = new LinkedHashMap<>();
 
         //获取请求参数
         String queryStr = (String) requestBody.get("queryStr");
         Integer pageNum = (Integer) requestBody.get("pageNum");
         Integer pageSize = (Integer) requestBody.get("pageSize");
-        Boolean isRecommend = (Boolean) requestBody.get("isRecommend");
 
         //创建page的HashMap，用于分页查询参数
         HashMap<String, Object> page = new HashMap<>();
         page.put("queryStr", queryStr);
         page.put("pageNum", (pageNum - 1) * pageSize);
         page.put("pageSize", pageSize);
-        page.put("isRecommend", isRecommend);
 
         //查询类型列表
         ArrayList<Type> typeList = typeService.selectTypeByPage(page);
