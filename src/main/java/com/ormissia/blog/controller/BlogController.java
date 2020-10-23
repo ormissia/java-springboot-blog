@@ -135,7 +135,7 @@ public class BlogController {
         page.put("pageNum", (pageNum - 1) * pageSize);
         page.put("pageSize", pageSize);
         page.put("isDeleted", isDeleted);
-        page.put("isRecommend",isRecommend);
+        page.put("isRecommend", isRecommend);
 
         //查询当前页页的博客列表
         ArrayList<Blog> blogList = blogService.selectBlogByPage(page);
@@ -154,4 +154,29 @@ public class BlogController {
         return result;
     }
 
+    //删除博客的请求
+    //按照分页参数查询博客列表
+    @DeleteMapping(value = "/deleteBlogByBlogId/{blogId}")
+    @ApiOperation("根据博客Id删除博客（逻辑删除）")
+    public ReturnResult<LinkedHashMap<String, Object>> deleteBlogByBlogId(@PathVariable String blogId) {
+        ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();
+
+        //创建用于更新删除状态的Blog对象
+        Blog blog = new Blog();
+        blog.setBlogId(blogId);
+        blog.setDeleted(true);
+
+        Integer status = blogService.updateBlog(blog);
+
+        //给返回结果对象赋值
+//        if (status > 0) {
+            result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);
+            result.setMessage("删除成功");
+//        } else {
+//            result.setCode(ReturnResult.STATUS_INTERNAL_RESPONSE_SERVER_ERROR_VALUE);
+//            result.setMessage("删除失败");
+//        }
+
+        return result;
+    }
 }

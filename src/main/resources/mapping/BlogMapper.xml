@@ -168,6 +168,11 @@
         <if test="blog.blogContent != null and blog.blogContent != ''">
             blog_content = #{blog.blogContent},
         </if>
+        <if test="blog.isDeleted != null">
+            bi.is_deleted = #{blog.isDeleted},
+            delete_date = now(),
+            bc.is_deleted = #{blog.isDeleted},
+        </if>
         create_date = create_date
         where pk_blog_id = #{blog.blogId}
     </update>
