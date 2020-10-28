@@ -55,4 +55,5 @@ public class HttpResponse extends HashMap<String, Object> implements Serializabl
             super.put(DATA_TAG, data);
         }
     }
+
 }
