@@ -44,19 +44,19 @@ public class TagController {
         Tag tag = new Tag();
         tag.setTagName(tagName);
 
-        //判断tagId是否为空，如果为空则是新创建的类型
-        if (tagId == null || "".equals(tagId)) {
+        //判断tagId是否为"-1"，如果为"-1"则是新创建的类型
+        if (-1 == tagId) {
             //tagId为空，创建新的tag
             // TODO 新建之前先判断是否已存在相同的标签名字
             tagService.insertTag(tag);
         } else {
-            //tagId不为空，即为修改博客
+            //tagId不为"-1"，即为修改博客
             tag.setTagId(tagId);
             tagService.updateTag(tag);
         }
 
         result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);
-        result.setMessage("标签添加成功！");
+        result.setMessage("标签保存成功！");
         return result;
     }
 

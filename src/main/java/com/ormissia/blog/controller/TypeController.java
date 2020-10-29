@@ -49,19 +49,19 @@ public class TypeController {
         //用于保存类型是新建还是修改的状态，用于下面保存时候区分是插入还是修改,默认为true新增
         boolean newTypeFlag = true;
 
-        //判断typeId是否为空，如果为空则是新创建的类型
-        if (typeId == null || "".equals(typeId)) {
+        //判断typeId是否为"-1"，如果为"-1"则是新创建的类型
+        if (-1 == typeId) {
             //typeId为空，创建新的type
             // TODO 新建之前先判断是否已存在相同的标签名字
             typeService.insertType(type);
         } else {
-            //typeId不为空，即为修改博客
+            //typeId不为"-1"，即为修改博客
             type.setTypeId(typeId);
             typeService.updateType(type);
         }
 
         result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);
-        result.setMessage("类型添加成功！");
+        result.setMessage("类型保存成功！");
         return result;
     }
 

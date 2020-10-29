@@ -45,7 +45,7 @@
     <!--修改类型名字-->
     <update id="updateTag" parameterType="com.ormissia.blog.pojo.Tag">
         update tag
-        set tag_name = #{tag.typeName}
+        set tag_name = #{tag.tagName}
         where pk_tag_id = #{tag.tagId}
     </update>
 
