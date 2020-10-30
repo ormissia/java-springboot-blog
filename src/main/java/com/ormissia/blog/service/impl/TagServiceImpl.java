@@ -4,6 +4,7 @@ import com.ormissia.blog.dao.TagDao;
 import com.ormissia.blog.pojo.Tag;
 import com.ormissia.blog.service.TagService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -22,18 +23,21 @@ public class TagServiceImpl implements TagService {
 
     //标签新增接口
     @Override
+    @Transactional
     public Integer insertTag(Tag tag) {
         return tagDao.insertTag(tag);
     }
 
     //标签批量新增接口
     @Override
+    @Transactional
     public Integer insertTags(ArrayList<Tag> tags) {
         return tagDao.insertTags(tags);
     }
 
     //标签修改接口
     @Override
+    @Transactional
     public Integer updateTag(Tag tag) {
         return tagDao.updateTag(tag);
     }

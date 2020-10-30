@@ -4,6 +4,7 @@ import com.ormissia.blog.dao.TypeDao;
 import com.ormissia.blog.pojo.Type;
 import com.ormissia.blog.service.TypeService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -23,12 +24,14 @@ public class TypeServiceImpl implements TypeService {
 
     //类型新增接口
     @Override
+    @Transactional
     public Integer insertType(Type type) {
         return typeDao.insertType(type);
     }
 
     //类型修改接口
     @Override
+    @Transactional
     public Integer updateType(Type type) {
         return typeDao.updateType(type);
     }
