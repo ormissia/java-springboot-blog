@@ -48,4 +48,10 @@ public class TypeServiceImpl implements TypeService {
     public ArrayList<Type> selectTypeByPage(HashMap<String, Object> page) {
         return typeDao.selectTypeByPage(page);
     }
+
+    //根据名称查询类型是否已存在
+    @Override
+    public Integer selectTypeByTypeName(String typeName) {
+        return typeDao.selectTypeByTypeName(typeName);
+    }
 }

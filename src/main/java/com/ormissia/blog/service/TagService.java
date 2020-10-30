@@ -26,4 +26,7 @@ public interface TagService {
 
     //根据分页数据查询标签列表
     ArrayList<Tag> selectTagByPage(HashMap<String, Object> page);
+
+    //根据类型名字查询类型是否存在
+    Integer selectTagByTagName(String tagName);
 }

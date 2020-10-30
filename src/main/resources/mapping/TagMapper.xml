@@ -41,6 +41,13 @@
         </if>
     </select>
 
+    <!--根据类型名字查询类型是否存在-->
+    <select id="selectTagByTagName" parameterType="java.lang.String" resultType="Integer">
+        select count(tag_name)
+        from tag
+        where tag_name = #{tagName}
+    </select>
+
     <!--改-->
     <!--修改类型名字-->
     <update id="updateTag" parameterType="com.ormissia.blog.pojo.Tag">

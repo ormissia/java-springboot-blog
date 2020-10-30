@@ -30,6 +30,9 @@ public interface TagDao {
     //根据分页参数查询类型标签列表
     ArrayList<Tag> selectTagByPage(@Param("page") HashMap<String, Object> page);
 
+    //根据类型名称查询类型是否存在
+    Integer selectTagByTagName(@Param("tagName") String tagName);
+
     //改
     //修改标签信息
     Integer updateTag(@Param("tag") Tag tag);

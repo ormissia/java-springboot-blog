@@ -41,6 +41,13 @@
         </if>
     </select>
 
+    <!--根据名称查询类型是否已存在-->
+    <select id="selectTypeByTypeName" parameterType="java.lang.String" resultType="Integer">
+        select count(pk_type_id)
+        from type
+        where type_name = #{typeName}
+    </select>
+
     <!--改-->
     <!--修改标签名字-->
     <update id="updateType" parameterType="com.ormissia.blog.pojo.Type">

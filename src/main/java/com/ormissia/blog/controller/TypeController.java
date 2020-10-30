@@ -52,7 +52,12 @@ public class TypeController {
         //判断typeId是否为"-1"，如果为"-1"则是新创建的类型
         if (-1 == typeId) {
             //typeId为空，创建新的type
-            // TODO 新建之前先判断是否已存在相同的标签名字
+            //新建之前先判断是否已存在相同的标签名字
+            if (typeService.selectTypeByTypeName(typeName) >= 0) {
+                result.setCode(ReturnResult.STATUS_INTERNAL_RESPONSE_SERVER_ERROR_VALUE);
+                result.setMessage("类型已经存在！");
+                return result;
+            }
             typeService.insertType(type);
         } else {
             //typeId不为"-1"，即为修改博客

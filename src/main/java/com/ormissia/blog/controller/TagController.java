@@ -47,7 +47,12 @@ public class TagController {
         //判断tagId是否为"-1"，如果为"-1"则是新创建的类型
         if (-1 == tagId) {
             //tagId为空，创建新的tag
-            // TODO 新建之前先判断是否已存在相同的标签名字
+            //新建之前先判断是否已存在相同的标签名字
+            if (tagService.selectTagByTagName(tagName)>=0){
+                result.setCode(ReturnResult.STATUS_INTERNAL_RESPONSE_SERVER_ERROR_VALUE);
+                result.setMessage("标签已存在！");
+                return result;
+            }
             tagService.insertTag(tag);
         } else {
             //tagId不为"-1"，即为修改博客

@@ -54,4 +54,12 @@ public class TagServiceImpl implements TagService {
     public ArrayList<Tag> selectTagByPage(HashMap<String, Object> page) {
         return tagDao.selectTagByPage(page);
     }
+
+    //根据类型名称查询类型是否存在
+    @Override
+    public Integer selectTagByTagName(String tagName) {
+        return tagDao.selectTagByTagName(tagName);
+    }
+
+
 }
