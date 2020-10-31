@@ -2,6 +2,8 @@ package com.ormissia.blog.controller;
 
 import com.ormissia.blog.pojo.*;
 import com.ormissia.blog.service.BlogService;
+import com.ormissia.blog.service.TagService;
+import com.ormissia.blog.service.TypeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +27,12 @@ public class BlogController {
 
     @Resource
     private BlogService blogService;
+
+    @Resource
+    private TypeService typeService;
+
+    @Resource
+    private TagService tagService;
 
     //新增或修改博客
     @RequestMapping(value = "/saveBlog", method = RequestMethod.POST)
@@ -55,8 +63,9 @@ public class BlogController {
         //创建用于保存的Blog对象
         Blog blog = new Blog();
         User user = new User();
-        Type type = new Type();
-        ArrayList<Tag> tags = new ArrayList<>();
+
+        // TODO 给blog对象封装User、Type等对象属性
+        Type type = typeService.selectTypeByTypeName(typeName);
 
         //用于保存博客是新建还是修改的状态，用于下面保存时候区分是插入还是修改,默认为true新增
         boolean newBlogFlag = true;
@@ -76,6 +85,7 @@ public class BlogController {
             newBlogFlag = false;
         }
         blog.setBlogTitle(blogTitle);
+        blog.setType(type);
         blog.setDescription(description);
         blog.setBlogContent(blogContent);
         blog.setRecommend(isRecommend);
@@ -87,9 +97,9 @@ public class BlogController {
 
         //调用service方法保存blog到数据库
         if (newBlogFlag) {
-            blogService.insertBlog(blog);
+            blogService.insertBlog(blog, tagsName);
         } else {
-            blogService.updateBlog(blog);
+            blogService.updateBlog(blog, tagsName);
         }
 
         result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);
@@ -166,12 +176,13 @@ public class BlogController {
         blog.setBlogId(blogId);
         blog.setDeleted(true);
 
-        Integer status = blogService.updateBlog(blog);
+        //删除博客时，只需要修改isDeleted字段，不需要修改tagsName
+        Integer status = blogService.updateBlog(blog, null);
 
         //给返回结果对象赋值
 //        if (status > 0) {
-            result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);
-            result.setMessage("删除成功");
+        result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);
+        result.setMessage("删除成功");
 //        } else {
 //            result.setCode(ReturnResult.STATUS_INTERNAL_RESPONSE_SERVER_ERROR_VALUE);
 //            result.setMessage("删除失败");

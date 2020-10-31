@@ -51,7 +51,7 @@ public class TypeServiceImpl implements TypeService {
 
     //根据名称查询类型是否已存在
     @Override
-    public Integer selectTypeByTypeName(String typeName) {
+    public Type selectTypeByTypeName(String typeName) {
         return typeDao.selectTypeByTypeName(typeName);
     }
 }

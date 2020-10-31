@@ -30,7 +30,7 @@ public interface TypeDao {
     ArrayList<Type> selectTypeByPage(@Param("page") HashMap<String, Object> page);
 
     //根据名称查询类型是否已存在
-    Integer selectTypeByTypeName(@Param("typeName") String typeName);
+    Type selectTypeByTypeName(@Param("typeName") String typeName);
 
     //改
     //修改类型信息

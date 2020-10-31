@@ -16,6 +16,14 @@
             value (#{tag.tagName})
     </insert>
 
+    <insert id="insertTags">
+        insert into tag(tag_name)
+        values
+        <foreach collection="tagsName" item="tagName" separator=",">
+            (#{tagName})
+        </foreach>
+    </insert>
+
     <!--删-->
 
     <!--查-->
@@ -42,10 +50,20 @@
     </select>
 
     <!--根据类型名字查询类型是否存在-->
-    <select id="selectTagByTagName" parameterType="java.lang.String" resultType="Integer">
-        select count(tag_name)
+    <select id="selectTagByTagName" parameterType="java.lang.String" resultMap="tag">
+        select pk_tag_id, tag_name
         from tag
         where tag_name = #{tagName}
+    </select>
+
+    <!--根据标签名称集合查询类型存在的标签集合-->
+    <select id="selectTagsByTagName" parameterType="java.util.ArrayList" resultMap="tag">
+        select pk_tag_id, tag_name
+        from tag
+        where tag_name in
+        <foreach collection="tagsName" item="tagName" open="(" close=")" separator=",">
+            #{tagName}
+        </foreach>
     </select>
 
     <!--改-->

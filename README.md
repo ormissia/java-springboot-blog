@@ -64,7 +64,7 @@ CREATE TABLE blog_information
     KEY `blog_FK` (`user_id`),
     KEY `blog_FK_1` (`type_id`),
     CONSTRAINT `blog_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`pk_user_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT `blog_FK_1` FOREIGN KEY (`type_id`) REFERENCES `type` (`pk_type_id`) ON DELETE SET NULL ON UPDATE CASCADE
+    CONSTRAINT `blog_FK_1` FOREIGN KEY (`type_id`) REFERENCES `type` (`pk_type_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8
 ```

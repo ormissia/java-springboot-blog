@@ -23,5 +23,5 @@ public interface TypeService {
     //根据分页数据查询类型列表
     ArrayList<Type> selectTypeByPage(HashMap<String, Object> page);
     //根据名称查询类型是否已存在
-    Integer selectTypeByTypeName(String typeName);
+    Type selectTypeByTypeName(String typeName);
 }

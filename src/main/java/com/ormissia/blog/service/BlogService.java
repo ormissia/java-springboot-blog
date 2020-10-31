@@ -15,10 +15,10 @@ import java.util.HashMap;
 public interface BlogService {
 
     //博客新增接口
-    Integer insertBlog(Blog blog);
+    Integer insertBlog(Blog blog,ArrayList<String> tagsName);
 
     //博客修改接口
-    Integer updateBlog(Blog blog);
+    Integer updateBlog(Blog blog,ArrayList<String> tagsName);
 
     //博客查询接口
     //统计博客总数，是否统计未删除的根据参数决定

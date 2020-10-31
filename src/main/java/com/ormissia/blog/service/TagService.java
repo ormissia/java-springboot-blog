@@ -14,9 +14,6 @@ public interface TagService {
     //标签新增接口
     Integer insertTag(Tag tag);
 
-    //批量新增标签接口
-    Integer insertTags(ArrayList<Tag> tags);
-
     //标签修改接口
     Integer updateTag(Tag tag);
 
@@ -28,5 +25,5 @@ public interface TagService {
     ArrayList<Tag> selectTagByPage(HashMap<String, Object> page);
 
     //根据类型名字查询类型是否存在
-    Integer selectTagByTagName(String tagName);
+    Tag selectTagByTagName(String tagName);
 }

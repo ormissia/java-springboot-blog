@@ -53,7 +53,7 @@ public class TypeController {
         if (-1 == typeId) {
             //typeId为空，创建新的type
             //新建之前先判断是否已存在相同的标签名字
-            if (typeService.selectTypeByTypeName(typeName) >= 0) {
+            if (typeService.selectTypeByTypeName(typeName) != null) {
                 result.setCode(ReturnResult.STATUS_INTERNAL_RESPONSE_SERVER_ERROR_VALUE);
                 result.setMessage("类型已经存在！");
                 return result;

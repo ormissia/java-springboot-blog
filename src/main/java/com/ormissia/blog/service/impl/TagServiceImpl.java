@@ -28,13 +28,6 @@ public class TagServiceImpl implements TagService {
         return tagDao.insertTag(tag);
     }
 
-    //标签批量新增接口
-    @Override
-    @Transactional
-    public Integer insertTags(ArrayList<Tag> tags) {
-        return tagDao.insertTags(tags);
-    }
-
     //标签修改接口
     @Override
     @Transactional
@@ -55,11 +48,10 @@ public class TagServiceImpl implements TagService {
         return tagDao.selectTagByPage(page);
     }
 
-    //根据类型名称查询类型是否存在
+    //根据标签名称查询类型是否存在
     @Override
-    public Integer selectTagByTagName(String tagName) {
+    public Tag selectTagByTagName(String tagName) {
         return tagDao.selectTagByTagName(tagName);
     }
-
 
 }

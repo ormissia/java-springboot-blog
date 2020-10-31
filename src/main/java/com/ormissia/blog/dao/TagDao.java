@@ -19,7 +19,7 @@ public interface TagDao {
     Integer insertTag(@Param("tag") Tag tag);
 
     //批量插入标签
-    Integer insertTags(@Param("tags") ArrayList<Tag> tags);
+    Integer insertTags(@Param("tagsName") ArrayList<String> tagsName);
 
     //删
 
@@ -31,7 +31,10 @@ public interface TagDao {
     ArrayList<Tag> selectTagByPage(@Param("page") HashMap<String, Object> page);
 
     //根据类型名称查询类型是否存在
-    Integer selectTagByTagName(@Param("tagName") String tagName);
+    Tag selectTagByTagName(@Param("tagName") String tagName);
+
+    //根据标签名称集合查询类型存在的标签集合
+    ArrayList<Tag> selectTagsByTagName(@Param("tagsName") ArrayList<String> tagsName);
 
     //改
     //修改标签信息

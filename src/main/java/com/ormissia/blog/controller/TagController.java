@@ -48,7 +48,7 @@ public class TagController {
         if (-1 == tagId) {
             //tagId为空，创建新的tag
             //新建之前先判断是否已存在相同的标签名字
-            if (tagService.selectTagByTagName(tagName)>=0){
+            if (tagService.selectTagByTagName(tagName) != null) {
                 result.setCode(ReturnResult.STATUS_INTERNAL_RESPONSE_SERVER_ERROR_VALUE);
                 result.setMessage("标签已存在！");
                 return result;
@@ -64,8 +64,6 @@ public class TagController {
         result.setMessage("标签保存成功！");
         return result;
     }
-
-    // TODO 批量新增标签
 
     //按照分页参数查询标签列表
     @RequestMapping(value = "/selectTagByPage", method = RequestMethod.POST)
