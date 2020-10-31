@@ -150,6 +150,11 @@
                 and bi.is_recommended is true
             </when>
         </choose>
+        <choose>
+            <when test="page.isPublished">
+                and bi.is_published is true
+            </when>
+        </choose>
         <if test="page.queryStr != null and page.queryStr != ''">
             and blog_title like concat('%', #{page.queryStr}, '%')
         </if>

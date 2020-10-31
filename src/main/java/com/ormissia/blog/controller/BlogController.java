@@ -31,9 +31,6 @@ public class BlogController {
     @Resource
     private TypeService typeService;
 
-    @Resource
-    private TagService tagService;
-
     //新增或修改博客
     @RequestMapping(value = "/saveBlog", method = RequestMethod.POST)
     @ApiOperation("保存博客的接口")
@@ -138,6 +135,7 @@ public class BlogController {
         Integer pageSize = (Integer) requestBody.get("pageSize");
         Boolean isDeleted = (Boolean) requestBody.get("isDeleted");
         Boolean isRecommend = (Boolean) requestBody.get("isRecommend");
+        Boolean isPublished = (Boolean) requestBody.get("isPublished");
 
         //创建page的HashMap，用于分页查询参数
         HashMap<String, Object> page = new HashMap<>();
@@ -146,6 +144,7 @@ public class BlogController {
         page.put("pageSize", pageSize);
         page.put("isDeleted", isDeleted);
         page.put("isRecommend", isRecommend);
+        page.put("isPublished", isPublished);
 
         //查询当前页页的博客列表
         ArrayList<Blog> blogList = blogService.selectBlogByPage(page);
