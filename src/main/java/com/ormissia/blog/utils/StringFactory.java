@@ -21,7 +21,7 @@ public class StringFactory {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
         String thisMonth = sdf.format(new Date());
 
-        String imagePath = relativePath + "\\image\\top-image\\" + thisMonth;
+        String imagePath = relativePath + "/image/top-image/" + thisMonth;
         return imagePath;
     }
 
