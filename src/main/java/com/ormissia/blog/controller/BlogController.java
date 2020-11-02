@@ -21,7 +21,7 @@ import java.util.*;
  */
 
 @RestController
-@RequestMapping("/api/private")
+@RequestMapping("/api")
 @Api(tags = "博客控制器")
 public class BlogController {
 
@@ -32,7 +32,7 @@ public class BlogController {
     private TypeService typeService;
 
     //新增或修改博客
-    @RequestMapping(value = "/saveBlog", method = RequestMethod.POST)
+    @RequestMapping(value = "/private/saveBlog", method = RequestMethod.POST)
     @ApiOperation("保存博客的接口")
     public ReturnResult<String> saveBlog(@RequestBody HashMap<String, Object> requestBody) {
         ReturnResult<String> result = new ReturnResult<>();
@@ -105,7 +105,7 @@ public class BlogController {
     }
 
     //根据博客Id来查询博客相关信息
-    @RequestMapping(value = "/selectBlogByBlogId", method = RequestMethod.POST)
+    @RequestMapping(value = "/public/selectBlogByBlogId", method = RequestMethod.POST)
     @ApiOperation("根据博客Id来查询博客的接口")
     @ApiImplicitParam(name = "blogId", value = "博客Id", required = true, dataType = "String")
     public ReturnResult<Blog> selectBlogByBlogId(String blogId) {
@@ -122,7 +122,7 @@ public class BlogController {
     }
 
     //按照分页参数查询博客列表
-    @RequestMapping(value = "/selectBlogByPage", method = RequestMethod.POST)
+    @RequestMapping(value = "/public/selectBlogByPage", method = RequestMethod.POST)
     @ApiOperation("根据分页数据来查询博客的接口")
     public ReturnResult<LinkedHashMap<String, Object>> selectBlogByPage(@RequestBody HashMap<String, Object> requestBody) {
         ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();
@@ -164,8 +164,7 @@ public class BlogController {
     }
 
     //删除博客的请求
-    //按照分页参数查询博客列表
-    @DeleteMapping(value = "/deleteBlogByBlogId/{blogId}")
+    @DeleteMapping(value = "/private/deleteBlogByBlogId/{blogId}")
     @ApiOperation("根据博客Id删除博客（逻辑删除）")
     public ReturnResult<LinkedHashMap<String, Object>> deleteBlogByBlogId(@PathVariable String blogId) {
         ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();
