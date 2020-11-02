@@ -23,7 +23,7 @@ import java.util.LinkedHashMap;
  */
 
 @RestController
-@RequestMapping("/api/private")
+@RequestMapping("/api")
 @Api(tags = "标签控制器")
 public class TagController {
 
@@ -31,7 +31,7 @@ public class TagController {
     private TagService tagService;
 
     //新增或者修改单个标签
-    @RequestMapping(value = "/createNewTag", method = RequestMethod.POST)
+    @RequestMapping(value = "/private/createNewTag", method = RequestMethod.POST)
     @ApiOperation("保存类型的接口")
     public ReturnResult<String> createNewTag(@RequestBody HashMap<String, Object> requestBody) {
         ReturnResult<String> result = new ReturnResult<>();
@@ -66,7 +66,7 @@ public class TagController {
     }
 
     //按照分页参数查询标签列表
-    @RequestMapping(value = "/selectTagByPage", method = RequestMethod.POST)
+    @RequestMapping(value = "/private/selectTagByPage", method = RequestMethod.POST)
     @ApiOperation("根据分页数据来查询标签的接口")
     public ReturnResult<LinkedHashMap<String, Object>> selectTagByPage(@RequestBody HashMap<String, Object> requestBody) {
         ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();

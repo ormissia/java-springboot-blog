@@ -18,7 +18,7 @@ import java.util.LinkedHashMap;
  */
 
 @RestController
-@RequestMapping("/api/private")
+@RequestMapping("/api")
 @Api(tags = "用户控制器")
 public class UserController {
 
@@ -26,7 +26,7 @@ public class UserController {
     private UserService userService;
 
     //用户登录
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/public/login", method = RequestMethod.POST)
     @ApiOperation("登录的接口")
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "requestBody", value = "用户名", required = true, dataType = "HashMap")

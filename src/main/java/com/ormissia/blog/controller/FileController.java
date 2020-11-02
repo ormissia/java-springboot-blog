@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 
 @RestController
-@RequestMapping("/api/private")
+@RequestMapping("/api")
 @Api(tags = "文件控制器")
 public class FileController {
 
@@ -29,7 +29,7 @@ public class FileController {
     private FileService fileService;
 
     //上传图片
-    @RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
+    @RequestMapping(value = "/private/uploadImage", method = RequestMethod.POST)
     @ApiOperation("上传图片的接口")
     public ReturnResult<String> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
         ReturnResult<String> result = new ReturnResult<>();

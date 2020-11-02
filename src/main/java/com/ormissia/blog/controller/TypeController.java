@@ -25,7 +25,7 @@ import java.util.LinkedHashMap;
  */
 
 @RestController
-@RequestMapping("/api/private")
+@RequestMapping("/api")
 @Api(tags = "类型控制器")
 public class TypeController {
 
@@ -33,7 +33,7 @@ public class TypeController {
     private TypeService typeService;
 
     //新增或修改类型
-    @RequestMapping(value = "createNewType", method = RequestMethod.POST)
+    @RequestMapping(value = "/privatecreateNewType", method = RequestMethod.POST)
     @ApiOperation("保存类型的接口")
     public ReturnResult<String> createNewType(@RequestBody HashMap<String, Object> requestBody) {
         ReturnResult<String> result = new ReturnResult<>();
@@ -71,7 +71,7 @@ public class TypeController {
     }
 
     //按照分页参数查询类型列表
-    @RequestMapping(value = "/selectTypeByPage", method = RequestMethod.POST)
+    @RequestMapping(value = "/private/selectTypeByPage", method = RequestMethod.POST)
     @ApiOperation("根据分页数据来查询类型的接口")
     public ReturnResult<LinkedHashMap<String, Object>> selectTypeByPage(@RequestBody HashMap<String, Object> requestBody) {
         ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();

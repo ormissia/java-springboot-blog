@@ -30,7 +30,7 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     public Integer insertBlog(Blog blog, ArrayList<String> tagsName) {
         //处理前端传过来的tagsName，将数据库中不存在的新tag插入数据库
-        if (tagsName.size()>0){
+        if (tagsName != null && tagsName.size() > 0) {
             insertNewTags(tagsName);
             //查询插入之后的所有tagsList
             blog.setTags(tagDao.selectTagsByTagName(tagsName));
@@ -57,7 +57,7 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     public Integer updateBlog(Blog blog, ArrayList<String> tagsName) {
         //处理前端传过来的tagsName，将数据库中不存在的新tag插入数据库
-        if (tagsName.size()>0){
+        if (tagsName != null && tagsName.size() > 0) {
             insertNewTags(tagsName);
             //查询插入之后的所有tagsList
             blog.setTags(tagDao.selectTagsByTagName(tagsName));
