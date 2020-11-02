@@ -33,7 +33,7 @@ public class TypeController {
     private TypeService typeService;
 
     //新增或修改类型
-    @RequestMapping(value = "/privatecreateNewType", method = RequestMethod.POST)
+    @RequestMapping(value = "/private/createNewType", method = RequestMethod.POST)
     @ApiOperation("保存类型的接口")
     public ReturnResult<String> createNewType(@RequestBody HashMap<String, Object> requestBody) {
         ReturnResult<String> result = new ReturnResult<>();

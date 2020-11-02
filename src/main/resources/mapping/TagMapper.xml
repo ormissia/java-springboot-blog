@@ -44,6 +44,7 @@
         <if test="page.queryStr != null and page.queryStr != ''">
             and tag_name like concat('%', #{page.queryStr}, '%')
         </if>
+        order by tag_name
         <if test="page.pageNum != null and page.pageSize != null">
             limit #{page.pageNum},#{page.pageSize}
         </if>

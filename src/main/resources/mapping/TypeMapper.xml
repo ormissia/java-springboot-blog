@@ -36,6 +36,7 @@
         <if test="page.queryStr != null and page.queryStr != ''">
             and type_name like concat('%', #{page.queryStr}, '%')
         </if>
+        order by type_name
         <if test="page.pageNum != null and page.pageSize != null">
             limit #{page.pageNum},#{page.pageSize}
         </if>
