@@ -1,7 +1,6 @@
 package com.ormissia.blog.dao;
 
 import com.ormissia.blog.pojo.Blog;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
