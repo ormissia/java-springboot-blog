@@ -15,6 +15,7 @@ public class Blog implements Serializable {
     private User user;//博客所属用户实体类
     private Type type;//博客类型实体类
     private ArrayList<Tag> tags;//博客标签实体类集合
+    private String topImage;//博客首图
     private String blogTitle;//博客标题
     private String description;//博客描述
     private String blogContent;//博客内容
@@ -33,6 +34,7 @@ public class Blog implements Serializable {
                 ", user=" + user +
                 ", type=" + type +
                 ", tags=" + tags +
+                ", topImage='" + topImage + '\'' +
                 ", blogTitle='" + blogTitle + '\'' +
                 ", description='" + description + '\'' +
                 ", blogContent='" + blogContent + '\'' +
@@ -80,6 +82,14 @@ public class Blog implements Serializable {
 
     public void setTags(ArrayList<Tag> tags) {
         this.tags = tags;
+    }
+
+    public String getTopImage() {
+        return topImage;
+    }
+
+    public void setTopImage(String topImage) {
+        this.topImage = topImage;
     }
 
     public String getBlogTitle() {

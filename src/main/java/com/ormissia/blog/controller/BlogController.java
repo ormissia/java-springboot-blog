@@ -38,6 +38,7 @@ public class BlogController {
 
         //解析博客相关属性
         String blogId = (String) requestBody.get("blogId");
+        String topImage = (String) requestBody.get("topImage");
         String blogTitle = (String) requestBody.get("blogTitle");
         String description = (String) requestBody.get("description");
         String blogContent = (String) requestBody.get("blogContent");
@@ -80,6 +81,7 @@ public class BlogController {
             //博客不是新增，将newBlogFlag置为false
             newBlogFlag = false;
         }
+        blog.setTopImage(topImage);
         blog.setBlogTitle(blogTitle);
         blog.setType(type);
         blog.setDescription(description);

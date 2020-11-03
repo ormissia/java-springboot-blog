@@ -46,10 +46,11 @@
     <!--增-->
     <!--保存博客详细信息-->
     <insert id="insertBlogInformation">
-        insert into blog_information(pk_blog_id, user_id, type_id, blog_title, description, create_date, is_recommended,
-                                     is_published)
-            value (#{blog.blogId}, #{blog.user.userId}, #{blog.type.typeId}, #{blog.blogTitle}, #{blog.description},
-                   #{blog.createDate}, #{blog.isRecommend}, #{blog.isPublished})
+        insert into blog_information(pk_blog_id, user_id, type_id, top_image, blog_title,
+                                     description, create_date, is_recommended, is_published)
+            value (#{blog.blogId}, #{blog.user.userId}, #{blog.type.typeId}, #{blog.topImage},
+                   #{blog.blogTitle}, #{blog.description}, #{blog.createDate}, #{blog.isRecommend},
+                   #{blog.isPublished})
     </insert>
     <!--保存博客内容-->
     <insert id="insertBlogContent">

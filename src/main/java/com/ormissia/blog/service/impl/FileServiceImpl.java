@@ -18,14 +18,16 @@ public class FileServiceImpl implements FileService {
     @Override
     public String savePicByFormData(MultipartFile file) throws IOException {
         //生成图片存储路径
+        String relativePath = new StringFactory().getRelativePath();
         String imagePath = new StringFactory().getImagePath();
+        String completePath = relativePath + imagePath;
         //判断是否有路径
-        if (!new File(imagePath).exists()) {
-            new File(imagePath).mkdirs();
+        if (!new File(completePath).exists()) {
+            new File(completePath).mkdirs();
         }
         //使用UUID生成图片文件名
         String fileName = UUID.randomUUID() + ".jpg";
-        File tempFile = new File(imagePath, fileName);
+        File tempFile = new File(completePath, fileName);
         //文件不存在则创建文件
         if (!tempFile.exists()) {
             tempFile.createNewFile();

@@ -21,8 +21,7 @@ public class StringFactory {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
         String thisMonth = sdf.format(new Date());
 
-        String imagePath = relativePath + "/image/top-image/" + thisMonth;
-        return imagePath;
+        return "/image/top-image/" + thisMonth;
     }
 
     //获取当前绝对路径，用于文件操作相关

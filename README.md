@@ -51,6 +51,7 @@ CREATE TABLE blog_information
     `pk_blog_id`     varchar(100) NOT NULL COMMENT '博客ID',
     `user_id`        varchar(100) NOT NULL COMMENT '博客所属用户的ID',
     `type_id`        int          DEFAULT NULL COMMENT '类型ID，默认为-1，即无类型',
+    `top_image`      varchar(100) DEFAULT NULL COMMENT '博客首图',
     `blog_title`     varchar(100) NOT NULL COMMENT '博客标题',
     `description`    varchar(255) NOT NULL COMMENT '博客描述',
     `create_date`    varchar(100) NOT NULL COMMENT '创建时间',
