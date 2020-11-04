@@ -33,6 +33,9 @@ public interface TagDao {
     //根据类型名称查询类型是否存在
     Tag selectTagByTagName(@Param("tagName") String tagName);
 
+    //查询所有tag并统计每个tag包含的blog数量
+    ArrayList<Tag> selectTagCountBlog();
+
     //根据标签名称集合查询类型存在的标签集合
     ArrayList<Tag> selectTagsByTagName(@Param("tagsName") ArrayList<String> tagsName);
 

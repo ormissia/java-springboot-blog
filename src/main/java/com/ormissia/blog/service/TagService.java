@@ -24,6 +24,9 @@ public interface TagService {
     //根据分页数据查询标签列表
     ArrayList<Tag> selectTagByPage(HashMap<String, Object> page);
 
+    //查询所有tag并统计每个tag包含的blog数量
+    ArrayList<Tag> selectTagCountBlog();
+
     //根据类型名字查询类型是否存在
     Tag selectTagByTagName(String tagName);
 }

@@ -12,13 +12,19 @@ public class Tag implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer tagId;//标签ID
     private String tagName;//标签名称
+    private Integer totalBlogNum;//标签所含博客数量
 
     @Override
     public String toString() {
         return "Tag{" +
                 "tagId=" + tagId +
                 ", tagName='" + tagName + '\'' +
+                ", totalBlogNum=" + totalBlogNum +
                 '}';
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Integer getTagId() {
@@ -35,5 +41,13 @@ public class Tag implements Serializable {
 
     public void setTagName(String tagName) {
         this.tagName = tagName;
+    }
+
+    public Integer getTotalBlogNum() {
+        return totalBlogNum;
+    }
+
+    public void setTotalBlogNum(Integer totalBlogNum) {
+        this.totalBlogNum = totalBlogNum;
     }
 }

@@ -7,6 +7,7 @@
     <resultMap id="tag" type="com.ormissia.blog.pojo.Tag">
         <id property="tagId" column="pk_tag_id"/>
         <result property="tagName" column="tag_name"/>
+        <result property="totalBlogNum" column="total_blog_num"/>
     </resultMap>
 
     <!--增-->
@@ -55,6 +56,16 @@
         select pk_tag_id, tag_name
         from tag
         where tag_name = #{tagName}
+    </select>
+
+    <!--查询所有tag并统计每个tag包含的blog数量-->
+    <select id="selectTagCountBlog" resultMap="tag">
+        select pk_tag_id, tag_name, count(blog_id) as total_blog_num
+        from tag
+                 left join blog_tag bt on tag.pk_tag_id = bt.tag_id
+        group by pk_tag_id
+        having total_blog_num > 0
+        order by total_blog_num desc
     </select>
 
     <!--根据标签名称集合查询类型存在的标签集合-->

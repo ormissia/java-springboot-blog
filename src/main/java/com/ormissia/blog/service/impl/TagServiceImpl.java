@@ -48,6 +48,12 @@ public class TagServiceImpl implements TagService {
         return tagDao.selectTagByPage(page);
     }
 
+    //查询所有tag并统计每个tag包含的blog数量
+    @Override
+    public ArrayList<Tag> selectTagCountBlog() {
+        return tagDao.selectTagCountBlog();
+    }
+
     //根据标签名称查询类型是否存在
     @Override
     public Tag selectTagByTagName(String tagName) {

@@ -101,4 +101,18 @@ public class TagController {
         return result;
     }
 
+    //查询所有tag并统计每个tag包含的blog数量
+    @RequestMapping(value = "/public/selectTagCountBlog", method = RequestMethod.GET)
+    @ApiOperation("查询所有tag并统计每个tag包含的blog舒利昂")
+    public ReturnResult<ArrayList<Tag>> selectTagCountBlog() {
+        ReturnResult<ArrayList<Tag>> result = new ReturnResult<>();
+
+        ArrayList<Tag> data = tagService.selectTagCountBlog();
+        //给返回结果对象赋值
+        result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);
+        result.setMessage("查询成功");
+        result.setData(data);
+        return result;
+    }
+
 }
