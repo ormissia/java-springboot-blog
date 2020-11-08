@@ -44,9 +44,6 @@ public class TypeController {
         Type type = new Type();
         type.setTypeName(typeName);
 
-        //用于保存类型是新建还是修改的状态，用于下面保存时候区分是插入还是修改,默认为true新增
-        boolean newTypeFlag = true;
-
         //判断typeId是否为"-1"，如果为"-1"则是新创建的类型
         if (-1 == typeId) {
             //typeId为空，创建新的type
@@ -71,10 +68,8 @@ public class TypeController {
     //按照分页参数查询类型列表
     @RequestMapping(value = "/private/selectTypeByPage", method = RequestMethod.POST)
     @ApiOperation("根据分页数据来查询类型的接口")
-    public ReturnResult<LinkedHashMap<String, Object>> selectTypeByPage(@RequestBody HashMap<String, Object> requestBody) {
-        ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();
-        //用于存放列表数据和类型总数
-        LinkedHashMap<String, Object> data = new LinkedHashMap<>();
+    public ReturnResult<HashMap<String, Object>> selectTypeByPage(@RequestBody HashMap<String, Object> requestBody) {
+        ReturnResult<HashMap<String, Object>> result = new ReturnResult<>();
 
         //获取请求参数
         String queryStr = (String) requestBody.get("queryStr");
@@ -87,15 +82,8 @@ public class TypeController {
         page.put("pageNum", (pageNum - 1) * pageSize);
         page.put("pageSize", pageSize);
 
-        //查询类型列表
-        ArrayList<Type> typeList = typeService.selectTypeByPage(page);
-
-        //查询类型总数
-        Integer total = typeService.selectTypeTotal(page);
-
-        data.put("total", total);
-        data.put("typeList", typeList);
-
+        //分页查询结果
+        HashMap<String,Object> data = typeService.selectTypeByPage(page);
 
         //给返回结果对象赋值
         result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);

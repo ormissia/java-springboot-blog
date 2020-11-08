@@ -3,6 +3,7 @@ package com.ormissia.blog.service.impl;
 import com.ormissia.blog.dao.TagDao;
 import com.ormissia.blog.pojo.Tag;
 import com.ormissia.blog.service.TagService;
+import com.ormissia.blog.utils.PageResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,16 +37,16 @@ public class TagServiceImpl implements TagService {
     }
 
     //标签查询接口
-    //标签总量查询
-    @Override
-    public Integer selectTagTotal(HashMap<String, Object> page) {
-        return tagDao.selectTagTotal(page);
-    }
-
     //根据分页数据查询标签列表
     @Override
-    public ArrayList<Tag> selectTagByPage(HashMap<String, Object> page) {
-        return tagDao.selectTagByPage(page);
+    public HashMap<String,Object> selectTagByPage(HashMap<String, Object> page) {
+        //查询标签总数
+        Integer total = tagDao.selectTagTotal(page);
+        //查询当前页的tag列表
+        ArrayList<Object> tagList = tagDao.selectTagByPage(page);
+
+        //使用工具类创建分页返回值对象
+        return new PageResult(total,tagList);
     }
 
     //查询所有tag并统计每个tag包含的blog数量

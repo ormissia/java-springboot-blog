@@ -6,6 +6,8 @@ import java.util.HashMap;
 /**
  * @Author 宋奕锟
  * @Date: Create in 2020/10/26 11:40
+ *
+ * Http请求统一返回值工具类
  */
 public class HttpResponse extends HashMap<String, Object> implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -125,10 +125,8 @@ public class BlogController {
     //按照分页参数查询博客列表
     @RequestMapping(value = "/public/selectBlogByPage", method = RequestMethod.POST)
     @ApiOperation("根据分页数据来查询博客的接口")
-    public ReturnResult<LinkedHashMap<String, Object>> selectBlogByPage(@RequestBody HashMap<String, Object> requestBody) {
-        ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();
-        //用于存放列表数据和博客总数
-        LinkedHashMap<String, Object> data = new LinkedHashMap<>();
+    public ReturnResult<HashMap<String, Object>> selectBlogByPage(@RequestBody HashMap<String, Object> requestBody) {
+        ReturnResult<HashMap<String, Object>> result = new ReturnResult<>();
 
         //获取请求参数
         String queryStr = (String) requestBody.get("queryStr");
@@ -137,6 +135,7 @@ public class BlogController {
         Boolean isDeleted = (Boolean) requestBody.get("isDeleted");
         Boolean isRecommend = (Boolean) requestBody.get("isRecommend");
         Boolean isPublished = (Boolean) requestBody.get("isPublished");
+        Integer tagIds = (Integer) requestBody.get("tagIds");
 
         //创建page的HashMap，用于分页查询参数
         HashMap<String, Object> page = new HashMap<>();
@@ -146,15 +145,10 @@ public class BlogController {
         page.put("isDeleted", isDeleted);
         page.put("isRecommend", isRecommend);
         page.put("isPublished", isPublished);
+        page.put("tagIds", tagIds);
 
-        //查询当前页页的博客列表
-        ArrayList<Blog> blogList = blogService.selectBlogByPage(page);
-
-        //查询博客总数
-        Integer total = blogService.selectBlogTotal(page);
-
-        data.put("total", total);
-        data.put("blogList", blogList);
+        //分页查询结果
+        HashMap<String, Object> data = blogService.selectBlogByPage(page);
 
         //给返回结果对象赋值
         result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);

@@ -18,10 +18,9 @@ public interface TypeService {
     Integer updateType(Type type);
 
     //类型查询接口
-    //统计类型总数，是否统计未删除的根据参数决定
-    Integer selectTypeTotal(HashMap<String, Object> page);
     //根据分页数据查询类型列表
-    ArrayList<Type> selectTypeByPage(HashMap<String, Object> page);
+    HashMap<String,Object> selectTypeByPage(HashMap<String, Object> page);
+
     //根据名称查询类型是否已存在
     Type selectTypeByTypeName(String typeName);
 }

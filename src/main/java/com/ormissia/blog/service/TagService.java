@@ -18,11 +18,8 @@ public interface TagService {
     Integer updateTag(Tag tag);
 
     //标签查询接口
-    //统计标签总数，是否统计未删除的根据参数决定
-    Integer selectTagTotal(HashMap<String, Object> page);
-
     //根据分页数据查询标签列表
-    ArrayList<Tag> selectTagByPage(HashMap<String, Object> page);
+    HashMap<String,Object> selectTagByPage(HashMap<String, Object> page);
 
     //查询所有tag并统计每个tag包含的blog数量
     ArrayList<Tag> selectTagCountBlog();
