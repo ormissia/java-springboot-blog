@@ -77,19 +77,24 @@
     <!--统计博客总数，是否统计未删除的根据参数决定-->
     <select id="selectBlogTotal" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         select count(pk_blog_id)
-        from blog_information
+        from blog_information bi
         where 1=1
         <choose>
             <when test="page.isDeleted">
-                and is_deleted is true
+                and bi.is_deleted is true
             </when>
             <otherwise>
-                and is_deleted is not true
+                and bi.is_deleted is not true
             </otherwise>
         </choose>
         <choose>
             <when test="page.isRecommend">
-                and is_recommended is true
+                and bi.is_recommended is true
+            </when>
+        </choose>
+        <choose>
+            <when test="page.isPublished">
+                and bi.is_published is true
             </when>
         </choose>
         <if test="page.queryStr != null and page.queryStr != ''">
@@ -133,34 +138,44 @@
         type_name,
         pk_tag_id,
         tag_name
-        from blog_information bi
-        left outer join type t on t.pk_type_id = bi.type_id
-        left join blog_tag bt on bi.pk_blog_id = bt.blog_id
-        left join tag t2 on t2.pk_tag_id = bt.tag_id
+        from
+        (select
+        pk_blog_id,
+        type_id,
+        blog_title,
+        description,
+        create_date,
+        last_edit_date,
+        is_published
+        from blog_information
         where 1=1
         <choose>
             <when test="page.isDeleted">
-                and bi.is_deleted is true
+                and is_deleted is true
             </when>
             <otherwise>
-                and bi.is_deleted is not true
+                and is_deleted is not true
             </otherwise>
         </choose>
         <choose>
             <when test="page.isRecommend">
-                and bi.is_recommended is true
+                and is_recommended is true
             </when>
         </choose>
         <choose>
             <when test="page.isPublished">
-                and bi.is_published is true
+                and is_published is true
             </when>
         </choose>
         <if test="page.queryStr != null and page.queryStr != ''">
             and blog_title like concat('%', #{page.queryStr}, '%')
         </if>
         order by ifnull(last_edit_date, create_date) desc
-        limit #{page.pageNum},#{page.pageSize}
+        limit #{page.pageNum},#{page.pageSize})
+        bi
+        left outer join type t on t.pk_type_id = bi.type_id
+        left join blog_tag bt on bi.pk_blog_id = bt.blog_id
+        left join tag t2 on t2.pk_tag_id = bt.tag_id
     </select>
 
     <!--改-->
