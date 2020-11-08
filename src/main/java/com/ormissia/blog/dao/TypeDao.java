@@ -27,7 +27,7 @@ public interface TypeDao {
     Integer selectTypeTotal(@Param("page") HashMap<String, Object> page);
 
     //根据分页参数查询类型列表
-    ArrayList<Type> selectTypeByPage(@Param("page") HashMap<String, Object> page);
+    ArrayList<Object> selectTypeByPage(@Param("page") HashMap<String, Object> page);
 
     //根据名称查询类型是否已存在
     Type selectTypeByTypeName(@Param("typeName") String typeName);

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 /**
  * @Author 安红豆
@@ -68,10 +67,8 @@ public class TagController {
     //按照分页参数查询标签列表
     @RequestMapping(value = "/private/selectTagByPage", method = RequestMethod.POST)
     @ApiOperation("根据分页数据来查询标签的接口")
-    public ReturnResult<LinkedHashMap<String, Object>> selectTagByPage(@RequestBody HashMap<String, Object> requestBody) {
-        ReturnResult<LinkedHashMap<String, Object>> result = new ReturnResult<>();
-        //用于存放列表数据和标签总数
-        LinkedHashMap<String, Object> data = new LinkedHashMap<>();
+    public ReturnResult<HashMap<String, Object>> selectTagByPage(@RequestBody HashMap<String, Object> requestBody) {
+        ReturnResult<HashMap<String, Object>> result = new ReturnResult<>();
 
         //获取请求参数
         String queryStr = (String) requestBody.get("queryStr");
@@ -84,14 +81,8 @@ public class TagController {
         page.put("pageNum", (pageNum - 1) * pageSize);
         page.put("pageSize", pageSize);
 
-        //查询标签列表
-        ArrayList<Tag> tagList = tagService.selectTagByPage(page);
-
-        //查询标签总数
-        Integer total = tagService.selectTagTotal(page);
-
-        data.put("total", total);
-        data.put("tagList", tagList);
+        //分页查询结果
+        HashMap<String, Object> data = tagService.selectTagByPage(page);
 
         //给返回结果对象赋值
         result.setCode(ReturnResult.STATUS_RESPONSE_SUCCESSFUL_VALUE);

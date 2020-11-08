@@ -36,7 +36,7 @@ public interface BlogDao {
     Blog selectBlogByBlogId(@Param("blogId") String blogId);
 
     //根据分页参数查询博客列表
-    ArrayList<Blog> selectBlogByPage(@Param("page") HashMap<String, Object> page);
+    ArrayList<Object> selectBlogByPage(@Param("page") HashMap<String, Object> page);
 
 
     //改

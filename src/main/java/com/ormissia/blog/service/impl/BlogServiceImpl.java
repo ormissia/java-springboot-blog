@@ -5,12 +5,14 @@ import com.ormissia.blog.dao.TagDao;
 import com.ormissia.blog.pojo.Blog;
 import com.ormissia.blog.pojo.Tag;
 import com.ormissia.blog.service.BlogService;
+import com.ormissia.blog.utils.PageResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * @Author 安红豆
@@ -74,12 +76,6 @@ public class BlogServiceImpl implements BlogService {
         return null;
     }
 
-    //查询博客总数
-    @Override
-    public Integer selectBlogTotal(HashMap<String, Object> page) {
-        return blogDao.selectBlogTotal(page);
-    }
-
     //根据博客Id查询博客信息
     @Override
     public Blog selectBlogByBlogId(String blogId) {
@@ -88,8 +84,14 @@ public class BlogServiceImpl implements BlogService {
 
     //根据分页查询博客列表
     @Override
-    public ArrayList<Blog> selectBlogByPage(HashMap<String, Object> page) {
-        return blogDao.selectBlogByPage(page);
+    public HashMap<String, Object> selectBlogByPage(HashMap<String, Object> page) {
+        //查询博客总数
+        Integer total = blogDao.selectBlogTotal(page);
+        //查询当前页的博客列表
+        ArrayList<Object> blogList = blogDao.selectBlogByPage(page);
+
+        //使用工具类创建分页返回值对象
+        return new PageResult(total,blogList);
     }
 
     //接收前端传过来的tagsName集合，将原来不存在的新tag插入数据库中
