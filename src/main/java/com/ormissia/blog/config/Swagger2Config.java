@@ -16,6 +16,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Date: Create in 2020/9/27 16:30
  * <p>
  * Swagger2的配置类
+ *
+ * http://localhost:8085/swagger-ui.html#/
  */
 @Configuration
 @EnableSwagger2
