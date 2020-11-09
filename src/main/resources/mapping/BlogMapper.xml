@@ -7,6 +7,7 @@
     <resultMap id="blog" type="com.ormissia.blog.pojo.Blog">
         <id property="blogId" column="pk_blog_id"/>
         <result property="blogTitle" column="blog_Title"/>
+        <result property="topImage" column="top_image"/>
         <result property="description" column="description"/>
         <result property="blogContent" column="blog_content"/>
         <result property="createDate" column="create_date"/>
@@ -104,6 +105,7 @@
     <!--根据博客Id查询博客信息-->
     <select id="selectBlogByBlogId" parameterType="java.lang.String" resultMap="blog">
         select pk_blog_id,
+               top_image,
                blog_title,
                description,
                blog_content,
@@ -129,6 +131,7 @@
     <!--根据分页信息查询博客列表,模糊查询采用MySQL的concat函数-->
     <select id="selectBlogByPage" parameterType="java.util.HashMap" resultMap="blog">
         select pk_blog_id,
+        top_image,
         blog_title,
         description,
         create_date,
@@ -142,6 +145,7 @@
         (select
         pk_blog_id,
         type_id,
+        top_image,
         blog_title,
         description,
         create_date,

@@ -18,6 +18,5 @@ class StringFactoryTest {
 
     @Test
     void getRelativePath() {
-        System.out.println(new StringFactory().getRelativePath());
     }
 }
