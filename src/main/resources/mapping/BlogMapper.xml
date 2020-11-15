@@ -192,6 +192,9 @@
         <if test="blog.blogTitle != null and blog.blogTitle != ''">
             blog_title= #{blog.blogTitle},
         </if>
+        <if test="blog.topImage != null and blog.topImage != ''">
+            top_image= #{blog.topImage},
+        </if>
         <if test="blog.lastEditDate != null and blog.lastEditDate != ''">
             last_edit_date = #{blog.lastEditDate},
         </if>
