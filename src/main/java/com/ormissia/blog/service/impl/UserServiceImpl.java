@@ -51,4 +51,10 @@ public class UserServiceImpl implements UserService {
 
         return resultMap;
     }
+
+    //通过用户名查询用户信息
+    @Override
+    public User selectUserByUsername(String username) {
+        return userDao.selectUserByUsername(username);
+    }
 }
