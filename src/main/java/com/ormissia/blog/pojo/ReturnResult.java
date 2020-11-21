@@ -25,11 +25,11 @@ public class ReturnResult<T> implements Serializable {
 
     @Override
     public String toString() {
-        return "ReturnResult{" +
-                "code=" + code +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                '}';
+        return "{" +
+                "\"code\":\"" + code +
+                "\",\"message\":\"" + message + '\'' +
+                "\",\"data\":\"" + data +
+                "\"}";
     }
 
     public Integer getCode() {

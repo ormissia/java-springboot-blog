@@ -1,5 +1,7 @@
 package com.ormissia.blog.service;
 
+import com.ormissia.blog.pojo.User;
+
 import java.util.HashMap;
 
 /**
@@ -10,4 +12,7 @@ public interface UserService {
 
     //用户登录接口
     HashMap<String,String> userLogin(String username, String password);
+
+    //通过用户名获取用户信息
+    User selectUserByUsername(String username);
 }
